@@ -1,0 +1,16 @@
+C:\Users\victo\source\repos\SmartHint\SmartHint\bin\Debug\net7.0\appsettings.json
+C:\Users\victo\source\repos\SmartHint\SmartHint\bin\Debug\net7.0\params.json
+C:\Users\victo\source\repos\SmartHint\SmartHint\bin\Debug\net7.0\SmartHint.DAL.deps.json
+C:\Users\victo\source\repos\SmartHint\SmartHint\bin\Debug\net7.0\SmartHint.DAL.runtimeconfig.json
+C:\Users\victo\source\repos\SmartHint\SmartHint\bin\Debug\net7.0\SmartHint.DAL.dll
+C:\Users\victo\source\repos\SmartHint\SmartHint\bin\Debug\net7.0\SmartHint.DAL.pdb
+C:\Users\victo\source\repos\SmartHint\SmartHint\obj\Debug\net7.0\SmartHint.DAL.csproj.AssemblyReference.cache
+C:\Users\victo\source\repos\SmartHint\SmartHint\obj\Debug\net7.0\SmartHint.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\victo\source\repos\SmartHint\SmartHint\obj\Debug\net7.0\SmartHint.DAL.AssemblyInfoInputs.cache
+C:\Users\victo\source\repos\SmartHint\SmartHint\obj\Debug\net7.0\SmartHint.DAL.AssemblyInfo.cs
+C:\Users\victo\source\repos\SmartHint\SmartHint\obj\Debug\net7.0\SmartHint.DAL.csproj.CoreCompileInputs.cache
+C:\Users\victo\source\repos\SmartHint\SmartHint\obj\Debug\net7.0\SmartHint.DAL.dll
+C:\Users\victo\source\repos\SmartHint\SmartHint\obj\Debug\net7.0\refint\SmartHint.DAL.dll
+C:\Users\victo\source\repos\SmartHint\SmartHint\obj\Debug\net7.0\SmartHint.DAL.pdb
+C:\Users\victo\source\repos\SmartHint\SmartHint\obj\Debug\net7.0\SmartHint.DAL.genruntimeconfig.cache
+C:\Users\victo\source\repos\SmartHint\SmartHint\obj\Debug\net7.0\ref\SmartHint.DAL.dll

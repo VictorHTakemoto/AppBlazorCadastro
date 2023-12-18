@@ -1,0 +1,61 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\victo\\source\\repos\\SmartHint\\SmartHint.WebApp\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "C:\\Users\\victo\\source\\repos\\SmartHint\\SmartHint.WebApp\\obj\\Debug\\net8.0\\compressed\\wy7rfc2iyi.gz",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "C:\\Users\\victo\\source\\repos\\SmartHint\\SmartHint.WebApp\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SmartHint.WebApp.styles.css",
+      "PackagePath": "staticwebassets\\SmartHint.WebApp.styles.css"
+    },
+    {
+      "Id": "C:\\Users\\victo\\source\\repos\\SmartHint\\SmartHint.WebApp\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\victo\\source\\repos\\SmartHint\\SmartHint.WebApp\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\victo\\source\\repos\\SmartHint\\SmartHint.WebApp\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\victo\\source\\repos\\SmartHint\\SmartHint.WebApp\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\victo\\source\\repos\\SmartHint\\SmartHint.WebApp\\wwwroot\\icon-192.png",
+      "PackagePath": "staticwebassets\\icon-192.png"
+    },
+    {
+      "Id": "C:\\Users\\victo\\source\\repos\\SmartHint\\SmartHint.WebApp\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\victo\\source\\repos\\SmartHint\\SmartHint.WebApp\\wwwroot\\sample-data\\weather.json",
+      "PackagePath": "staticwebassets\\sample-data\\weather.json"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.SmartHint.WebApp.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.SmartHint.WebApp.props",
+      "PackagePath": "build\\SmartHint.WebApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.SmartHint.WebApp.props",
+      "PackagePath": "buildMultiTargeting\\SmartHint.WebApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.SmartHint.WebApp.props",
+      "PackagePath": "buildTransitive\\SmartHint.WebApp.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

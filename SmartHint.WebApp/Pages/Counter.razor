@@ -1,0 +1,273 @@
+﻿@page "/counter"
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Cadastro</PageTitle>
+
+<div class="container-fluid">
+    <div class="row px-3">
+        <div style="display: grid; grid-template-columns: repeat(1, 400px); gap: 10px;">
+
+            <h1 style="font-size:22px; font-family: 'Trebuchet MS' ">Cadastro de Clientes</h1>
+
+            <input type="text" id="NomeCad" placeholder="Nome Completo ou Razão Social do Cliente" maxlength="150" @bind="clientModel.Nome"></input>
+
+            <input type="text" id="EmailCad" placeholder="E-mail do Cliente" maxlength="150" @bind="clientModel.Email"></input>
+            <p style="font-size: 15px; font-family: Verdana; color:red;">@msgValidacao</p>
+
+            <input type="text" id="TelCad" placeholder="Telefone (##) #####-####" maxlength="14" @bind="clientModel.Telefone" @oninput="FormatTel"></input>
+
+            <InputDate id="dataCadastro" class="form-control form-control-sm col-4" format-value="yyyy-MM-dd" @bind-Value="@DateTimeNow" placeholder="Enter Expense end Date" @oninput="HandlerInputDateCad" readonly></InputDate>
+
+            <h1 style="font-size:22px; font-family: 'Trebuchet MS' ">Informações Pessoais</h1>
+
+            <div>
+                <div style="display: grid; grid-template-columns: repeat(1, 400px); gap: 10px;">
+                    <select @bind="clientModel.PersonTypeCadastro">
+                        <option value="" selected disabled>Selecione o tipo de Pessoa</option>
+                        @foreach (var opcao in opcoes)
+                        {
+                            <option value="@opcao">@opcao</option>
+                        }
+                    </select>
+
+                    <input type="text" id="CPF" placeholder="Insira o CPF ou o CNPJ do Cliente" maxlength="18" @bind="clientModel.CPFCadastro" @oninput="AplicarMascara"></input>
+
+                    <input type="text" id="IE" placeholder="Inscrição estadual para Pessoa Física" maxlength="15" @bind="clientModel.IECadastro" @oninput="FormatIE" disabled="@clientModel.IEBlocked"></input>
+
+                    <div style="display: flex; align-items: center;">
+                        <RadzenCheckBox @bind-Value=@clientModel.IEBlocked Name="CheckBox1"></RadzenCheckBox>
+                        <RadzenLabel Text="Isento" Component="CheckBox1" Style="margin-left: 8px; vertical-align: middle;"></RadzenLabel>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (clientModel.PersonTypeCadastro == "Física")
+{
+    Console.WriteLine($"Data atual: {clientModel.DataCadastro}");
+    Console.WriteLine("Caixa selecionada");
+    <div class="container-fluid">
+        <div class="row px-3">
+            <div style="display: grid; grid-template-columns: repeat(1, 400px); gap: 10px;">
+                <select @onchange="OnGenderChanged">
+                    <option value="" selected disabled>Gênero</option>
+                    @foreach (var gender in genderList)
+                    {
+                        <option value="@gender">@gender</option>
+                    }
+                </select>
+
+                <InputDate id="expenseedate" class="form-control form-control-sm col-4" format-value="yyyy-MM-dd" @bind-Value="@DateTimeNow" placeholder="Enter Expense end Date" @oninput="HandleInputChange"></InputDate>
+
+                <divstyle style="display: flex; align-items: center;">
+                    <RadzenCheckBox @bind-Value=@clientModel.CustomerBlocker Name="CheckBox2"></RadzenCheckBox>
+                    <RadzenLabel Text="Bloqueado" Component="CheckBox2" Style="margin-left: 8px; vertical-align: middle;"></RadzenLabel>
+                </divstyle>
+
+                <h1 style="font-size:20px; font-family: Verdana">Cadastre a senha de acesso do seu Cliente</h1>
+
+                <input type="password" id="senha" minlength="8" maxlength="15" placeholder="Digite a senha" @bind-value="@clientModel.Password" />
+                <input type="password" id="confirmPassword" minlength="8" maxlength="15" placeholder="Repita a senha" @bind-value="@ConfirmPass" @oninput="CheckPassword"/>
+                <p style="font-size: 15px; font-family: Verdana; color:red">@PassErroMsg</p>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    Console.WriteLine("Caixa Nao selecionada");
+}
+
+@code {
+
+    private string ConfirmPass { get; set; }
+    private string PassErroMsg = "";
+    private bool PassNotMatch { get; set; }
+    private void CheckPassword(ChangeEventArgs args)
+    {
+        string passToCheck = args.Value.ToString();
+        if(passToCheck != clientModel.Password)
+        {
+            PassErroMsg = "As senhas não conferem";
+            PassNotMatch = true;
+        }
+        else
+        {
+            PassErroMsg = "";
+            PassNotMatch = false;
+        }
+    }
+
+    //Define horario no campo data aniversario cliente
+    private DateTime DateTimeNow { get; set; } = DateTime.Now;
+    private async Task HandleInputChange(ChangeEventArgs args)
+    {
+        if (args.Value != null)
+        {
+            if (DateTime.TryParse(args.Value.ToString(), out DateTime result))
+            {
+                clientModel.birthDateCad = result.Date;
+            }
+            else
+            {
+                Console.WriteLine($"Deu erro");
+            }
+        }
+    }
+
+    private async Task HandlerInputDateCad(ChangeEventArgs args)
+    {
+        if(args.Value != null)
+        {
+            if (DateTime.TryParse(args.Value.ToString(), out DateTime result))
+            {
+                clientModel.DataCadastro = result;
+            }
+            else
+            {
+                Console.WriteLine($"Deu erro");
+            }
+        }
+    }
+    bool ShowFields;
+    bool ClientBlocked;
+
+    private void SendDB()
+    {
+        
+    }
+    //Objeto a ser enviado ao DB
+    private ClientModel clientModel = new();
+    private class ClientModel
+    {
+        public string Nome { get; set; }
+        public string Email { get; set; }
+        public string Telefone { get; set; }
+        public DateTime DataCadastro { get; set; }
+        public string PersonTypeCadastro { get; set; }
+        public string CPFCadastro { get; set; }
+        public string IECadastro { get; set; }
+        public string GeneroCadatro { get; set; }
+        public DateTime birthDateCad { get; set; }
+        public bool CustomerBlocker { get; set; }
+        public bool IEBlocked { get; set; }
+        public string Password { get; set; }
+    }
+
+    //Combobox Values
+    private List<string> opcoes = new List<string> { "Física", "Jurídica" };
+
+    List<string> genderList = new List<string> { "Feminino", "Masculino", "Outro" };
+    private void OnGenderChanged(ChangeEventArgs args)
+    {
+        clientModel.GeneroCadatro = args.Value.ToString();
+        Console.WriteLine($"Genero escolhido: {clientModel.GeneroCadatro}");
+    }
+
+    private string msgValidacao = "";
+    private void ValidateEmail()
+    {
+        try
+        {
+            var emailAdress = new System.Net.Mail.MailAddress(clientModel.Email);
+            msgValidacao = "O e-mail é valido";
+        }
+        catch (Exception ex)
+        {
+            msgValidacao = "Digite um e-mail válido";
+        }
+    }
+
+    private void FormatTel(ChangeEventArgs args)
+    {
+        clientModel.Telefone = new string(args.Value.ToString().Where(char.IsDigit).ToArray());
+        if (clientModel.Telefone.Length >= 2 && clientModel.Telefone.Length <= 7)
+        {
+            clientModel.Telefone = $"({clientModel.Telefone.Substring(0, 2)}){clientModel.Telefone.Substring(2)}";
+        }
+        else if (clientModel.Telefone.Length >= 8)
+        {
+            clientModel.Telefone = $"({clientModel.Telefone.Substring(0, 2)}){clientModel.Telefone.Substring(2, 5)}-{clientModel.Telefone.Substring(7)}";
+        }
+    }
+
+    private void FormatIE(ChangeEventArgs args)
+    {
+        clientModel.IECadastro = new string(args.Value.ToString().Where(char.IsDigit).ToArray());
+        //###.###.###-###
+        if (clientModel.IECadastro.Length >=3)
+        {
+            clientModel.IECadastro = clientModel.IECadastro.Insert(3, ".");
+        }
+        if (clientModel.IECadastro.Length >= 7) 
+        {
+            clientModel.IECadastro = clientModel.IECadastro.Insert(7, ".");
+        }
+        if (clientModel.IECadastro.Length >= 11)
+        {
+             clientModel.IECadastro = clientModel.IECadastro.Insert(11, "-");
+        }
+    }
+
+    //Funçoes mascara CPF/CNPJ
+    private void AplicarMascara(ChangeEventArgs args)
+    {
+        clientModel.CPFCadastro = new string(args.Value.ToString().Where(char.IsDigit).ToArray());
+        if (clientModel.CPFCadastro.Length <= 11)
+        {
+            clientModel.CPFCadastro = FormatCPF(clientModel.CPFCadastro);
+        }
+        else
+        {
+            clientModel.CPFCadastro = FormatCNPJ(clientModel.CPFCadastro);
+        }
+    }
+
+    private string FormatCPF(string cpf)
+    {
+        if (cpf.Length >= 3)
+        {
+            cpf = cpf.Insert(3, ".");
+        }
+        if (cpf.Length >= 7)
+        {
+            cpf = cpf.Insert(7, ".");
+        }
+        if (cpf.Length >= 11)
+        {
+            cpf = cpf.Insert(11, "-");
+        }
+        return cpf;
+    }
+
+    private string FormatCNPJ(string cnpj)
+    {
+        if (cnpj.Length >= 2)
+        {
+            cnpj = cnpj.Insert(2, ".");
+        }
+        if (cnpj.Length >= 6)
+        {
+            cnpj = cnpj.Insert(6, ".");
+        }
+        if (cnpj.Length >= 10)
+        {
+            cnpj = cnpj.Insert(10, "/");
+        }
+        if (cnpj.Length >= 15)
+        {
+            cnpj = cnpj.Insert(15, "-");
+        }
+
+        return cnpj;
+    }
+
+    private bool ShowField { get; set; }
+
+    private async Task OnShowFieldChanged(bool newValue)
+    {
+        ShowField = newValue;
+    }
+}
