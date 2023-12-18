@@ -1180,3 +1180,4 @@ C:\Users\victo\source\repos\SmartHint\SmartHint.WebApp\obj\Debug\net8.0\SmartHin
 C:\Users\victo\source\repos\SmartHint\SmartHint.WebApp\obj\Debug\net8.0\refint\SmartHint.WebApp.dll
 C:\Users\victo\source\repos\SmartHint\SmartHint.WebApp\obj\Debug\net8.0\SmartHint.WebApp.pdb
 C:\Users\victo\source\repos\SmartHint\SmartHint.WebApp\obj\Debug\net8.0\ref\SmartHint.WebApp.dll
+C:\Users\victo\source\repos\SmartHint\SmartHint.WebApp\obj\Debug\net8.0\SmartHint.WebApp.sourcelink.json

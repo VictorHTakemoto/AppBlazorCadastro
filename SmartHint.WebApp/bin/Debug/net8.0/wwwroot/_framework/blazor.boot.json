@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "SmartHint.WebApp",
   "resources": {
-    "hash": "sha256-YxosZq/sHSHmIprg3B/4rYwaxnKEODbrNweVd4bVWLw=",
+    "hash": "sha256-fCL9wMRJuDrvfb02dmmQxp2dlFfyxSBLSvrDWgxpyLM=",
     "jsModuleNative": {
       "dotnet.native.8.0.0.p0omglqu2j.js": "sha256-LjLDIz9+J7uuiwMlQ4HbNx2BnSpphOtO2MwkoI28vdI="
     },
@@ -237,11 +237,11 @@
       "netstandard.wasm": "sha256-A0h86SDieTMoU/wU2JTszWCsUmMuguDcbap0b0BzsmI=",
       "System.Private.CoreLib.wasm": "sha256-/0DNIm/T0C07X7Tuz5uR8JvVCoAfEE2MnfPUSjyS9xc=",
       "SmartHint.DAL.wasm": "sha256-wnetX5Y4c0LZXGGfviFbOAI7r46i5mf1Y+qhFOecv1U=",
-      "SmartHint.WebApp.wasm": "sha256-z/gvxKDmr4MQOgR1pDatx4+DecGwOmbrnXNUI/HVYcE="
+      "SmartHint.WebApp.wasm": "sha256-8adiwYJsGidwpFk+x8cqhrNwTM2iJyUoNDGMQnKM5Kc="
     },
     "pdb": {
       "SmartHint.DAL.pdb": "sha256-g41rm2fgK5rv2mBxypW6g/XrmMB3fTyKeJl1zN/gNhM=",
-      "SmartHint.WebApp.pdb": "sha256-r5JaqYimztCG8WKCK/dyOL9ttcQq8gnvX4pCbG80jF4="
+      "SmartHint.WebApp.pdb": "sha256-q55PEintrleS8lpEaZBHjhjeBbSefH9qFeVMgVapoKc="
     }
   },
   "cacheBootResources": true,

@@ -1,4 +1,6 @@
 ﻿@page "/counter"
+@using Radzen
+@using SmartHint.DAL.Model
 @inject IJSRuntime JSRuntime
 
 <PageTitle>Cadastro</PageTitle>
@@ -16,7 +18,7 @@
 
             <input type="text" id="TelCad" placeholder="Telefone (##) #####-####" maxlength="14" @bind="clientModel.Telefone" @oninput="FormatTel"></input>
 
-            <InputDate id="dataCadastro" class="form-control form-control-sm col-4" format-value="yyyy-MM-dd" @bind-Value="@DateTimeNow" placeholder="Enter Expense end Date" @oninput="HandlerInputDateCad" readonly></InputDate>
+            <InputDate id="dataCadastro" class="form-control form-control-sm col-4" format-value="yyyy-MM-dd" @bind-Value="@DateTimeNow" placeholder="Enter Expense end Date" @oninput="HandlerInputDateCad"></InputDate>
 
             <h1 style="font-size:22px; font-family: 'Trebuchet MS' ">Informações Pessoais</h1>
 
@@ -65,12 +67,6 @@
                     <RadzenCheckBox @bind-Value=@clientModel.CustomerBlocker Name="CheckBox2"></RadzenCheckBox>
                     <RadzenLabel Text="Bloqueado" Component="CheckBox2" Style="margin-left: 8px; vertical-align: middle;"></RadzenLabel>
                 </divstyle>
-
-                <h1 style="font-size:20px; font-family: Verdana">Cadastre a senha de acesso do seu Cliente</h1>
-
-                <input type="password" id="senha" minlength="8" maxlength="15" placeholder="Digite a senha" @bind-value="@clientModel.Password" />
-                <input type="password" id="confirmPassword" minlength="8" maxlength="15" placeholder="Repita a senha" @bind-value="@ConfirmPass" @oninput="CheckPassword"/>
-                <p style="font-size: 15px; font-family: Verdana; color:red">@PassErroMsg</p>
             </div>
         </div>
     </div>
@@ -79,8 +75,109 @@ else
 {
     Console.WriteLine("Caixa Nao selecionada");
 }
+<div class="container-fluid">
+    <div class="row px-3">
+        <div style="display: grid; grid-template-columns: repeat(1, 400px); gap: 10px;">
+            <h1 style="font-size:20px; font-family: Verdana">Cadastre a senha de acesso do seu Cliente</h1>
+
+            <input type="password" id="senha" minlength="8" maxlength="15" placeholder="Digite a senha" @bind-value="@clientModel.Password" />
+            <input type="password" id="confirmPassword" minlength="8" maxlength="15" placeholder="Repita a senha" @bind-value="@ConfirmPass" @oninput="CheckPassword" />
+            <p style="font-size: 15px; font-family: Verdana; color:red">@PassErroMsg</p>
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="1rem" Wrap="FlexWrap.Wrap">
+                <RadzenButton Style="font-size: 16px; cursor: pointer; background-color: #1D1859; text-align: center; border-radius: 10px; color: white; border: none;" class="radzen-button;" Click=@(args => OnClick("Botao submit")) Text="Cadastrar" ButtonStyle="ButtonStyle.Primary"></RadzenButton>
+            </RadzenStack>
+            <p style="font-size: 15px; font-family: Verdana; color:red">Preencha todos os Campos</p>
+        </div>
+    </div>
+</div>
 
 @code {
+
+    private void OnClick(string text)
+    {
+        bool result = ValidarCampos();
+        Console.WriteLine($"Deu Erro: {result}");
+        if (result)
+        {
+            using (smartHintDBContext db = new())
+            {
+                db.CustomerInfos.Add(new()
+                    {
+                        CustomerGender = clientModel.GeneroCadatro,
+                        CustomerDateOfBirth = clientModel.birthDateCad,
+                        CustomerBlocked
+                    });
+            }
+        }
+        else
+        {
+            Console.WriteLine("Campos Não validos");
+        }
+
+    }
+
+    public bool ValidarCampos()
+    {
+        if (clientModel.PersonTypeCadastro == "Física")
+        {
+            if (string.IsNullOrEmpty(clientModel.Nome))
+            {
+                return false;
+            }
+            if (string.IsNullOrEmpty(clientModel.Email))
+            {
+                return false;
+            }
+            if (string.IsNullOrEmpty(clientModel.Telefone))
+            {
+                return false;
+            }
+            if (string.IsNullOrEmpty(clientModel.PersonTypeCadastro))
+            {
+                return false;
+            }
+            if (string.IsNullOrEmpty(clientModel.GeneroCadatro))
+            {
+                return false;
+            }
+            if (string.IsNullOrEmpty(clientModel.Password))
+            {
+                return false;
+            }
+            Console.WriteLine("Passou Juridico");
+            return true;
+        }
+        if (clientModel.PersonTypeCadastro == "Jurídica")
+        {
+            if (string.IsNullOrEmpty(clientModel.Nome))
+            {
+                return false;
+            }
+            if (string.IsNullOrEmpty(clientModel.Email))
+            {
+                return false;
+            }
+            if (string.IsNullOrEmpty(clientModel.Telefone))
+            {
+                return false;
+            }
+            if (string.IsNullOrEmpty(clientModel.PersonTypeCadastro))
+            {
+                return false;
+            }
+            if (string.IsNullOrEmpty(clientModel.IECadastro))
+            {
+                return false;
+            }
+            if (string.IsNullOrEmpty(clientModel.Password))
+            {
+                return false;
+            }
+            Console.WriteLine("Passou Juridico");
+            return true;
+        }
+        return false;
+    }
 
     private string ConfirmPass { get; set; }
     private string PassErroMsg = "";
@@ -88,7 +185,7 @@ else
     private void CheckPassword(ChangeEventArgs args)
     {
         string passToCheck = args.Value.ToString();
-        if(passToCheck != clientModel.Password)
+        if (passToCheck != clientModel.Password)
         {
             PassErroMsg = "As senhas não conferem";
             PassNotMatch = true;
@@ -119,7 +216,7 @@ else
 
     private async Task HandlerInputDateCad(ChangeEventArgs args)
     {
-        if(args.Value != null)
+        if (args.Value != null)
         {
             if (DateTime.TryParse(args.Value.ToString(), out DateTime result))
             {
@@ -136,7 +233,7 @@ else
 
     private void SendDB()
     {
-        
+
     }
     //Objeto a ser enviado ao DB
     private ClientModel clientModel = new();
@@ -197,17 +294,17 @@ else
     {
         clientModel.IECadastro = new string(args.Value.ToString().Where(char.IsDigit).ToArray());
         //###.###.###-###
-        if (clientModel.IECadastro.Length >=3)
+        if (clientModel.IECadastro.Length >= 3)
         {
             clientModel.IECadastro = clientModel.IECadastro.Insert(3, ".");
         }
-        if (clientModel.IECadastro.Length >= 7) 
+        if (clientModel.IECadastro.Length >= 7)
         {
             clientModel.IECadastro = clientModel.IECadastro.Insert(7, ".");
         }
         if (clientModel.IECadastro.Length >= 11)
         {
-             clientModel.IECadastro = clientModel.IECadastro.Insert(11, "-");
+            clientModel.IECadastro = clientModel.IECadastro.Insert(11, "-");
         }
     }
 

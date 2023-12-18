@@ -105,3 +105,14 @@ code {
 #dataCadastro-webkit-calendar-picker-indicator{
     display: none;
 }
+
+.radzen-button {
+    background-color: royalblue;
+    padding: 15px, 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
